@@ -11,6 +11,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from ml_from_scratch.linear_model import LinearRegression
+from ml_from_scratch.utils import mean_absolute_error, mean_squared_error, r2_score
 
 
 def main() -> None:
@@ -21,6 +22,10 @@ def main() -> None:
     model = LinearRegression()
     model.fit(X, y)
     predictions = model.predict(X)
+
+    print(f"MSE: {mean_squared_error(y, predictions):.3f}")
+    print(f"MAE: {mean_absolute_error(y, predictions):.3f}")
+    print(f"R2: {r2_score(y, predictions):.3f}")
 
     plt.scatter(X.ravel(), y, label="Training data", alpha=0.75)
     plt.plot(X.ravel(), predictions, color="black", label="Prediction")
