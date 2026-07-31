@@ -9,7 +9,10 @@ description = "Core machine learning algorithms built from scratch using Python 
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
-    "numpy>=1.22.0"
+    "numpy>=1.22.0",
+    "matplotlib>=3.5.0",
+    "pytest>=7.0.0",
+    "scikit-learn>=1.0.0",
 ]
 
 [tool.setuptools.packages.find]
