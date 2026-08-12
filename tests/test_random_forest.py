@@ -1,0 +1,63 @@
+import numpy as np
+import pytest
+
+from ml_from_scratch.tree import RandomForestClassifier, RandomForestRegressor
+
+
+def test_random_forest_classifier_fits_simple_binary_data():
+    X = np.array([[0.0], [1.0], [2.0], [3.0]])
+    y = np.array([0.0, 0.0, 1.0, 1.0])
+
+    model = RandomForestClassifier(
+        n_estimators=5,
+        bootstrap=False,
+        max_features=1.0,
+        random_state=0,
+    )
+    fitted = model.fit(X, y)
+
+    assert fitted is model
+    np.testing.assert_array_equal(model.predict(X), y)
+
+
+def test_random_forest_classifier_predict_proba_sums_to_one():
+    X = np.array([[0.0], [1.0], [2.0], [3.0]])
+    y = np.array([0.0, 0.0, 1.0, 1.0])
+
+    model = RandomForestClassifier(
+        n_estimators=5,
+        bootstrap=False,
+        max_features=1.0,
+        random_state=0,
+    ).fit(X, y)
+    probabilities = model.predict_proba([[0.5], [2.5]])
+
+    assert probabilities.shape == (2, 2)
+    np.testing.assert_allclose(probabilities.sum(axis=1), np.ones(2))
+
+
+def test_random_forest_regressor_fits_piecewise_constant_data():
+    X = np.array([[0.0], [1.0], [2.0], [3.0]])
+    y = np.array([1.0, 1.0, 4.0, 4.0])
+
+    model = RandomForestRegressor(
+        n_estimators=5,
+        bootstrap=False,
+        max_features=1.0,
+        random_state=0,
+    )
+    model.fit(X, y)
+
+    np.testing.assert_allclose(model.predict(X), y)
+
+
+def test_random_forest_predict_rejects_feature_mismatch():
+    model = RandomForestClassifier(
+        n_estimators=3,
+        bootstrap=False,
+        max_features=1.0,
+        random_state=0,
+    ).fit([[0.0], [1.0]], [0.0, 1.0])
+
+    with pytest.raises(ValueError, match="different number of features"):
+        model.predict([[0.0, 1.0]])
