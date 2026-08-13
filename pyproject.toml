@@ -17,3 +17,10 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 where = ["."]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py39"
+src = ["ml_from_scratch", "tests", "examples"]
