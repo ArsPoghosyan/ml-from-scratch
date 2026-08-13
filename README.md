@@ -1,4 +1,5 @@
 # ML From Scratch
+[![CI](https://github.com/ArsPoghosyan/ml-from-scratch/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/ArsPoghosyan/ml-from-scratch/actions/workflows/ci.yml)
 
 Core machine learning algorithms implemented from scratch with Python and NumPy.
 
