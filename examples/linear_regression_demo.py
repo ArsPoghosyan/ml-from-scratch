@@ -34,7 +34,11 @@ def main() -> None:
     plt.title("Linear Regression From Scratch")
     plt.legend()
     plt.tight_layout()
-    plt.show()
+
+    if "agg" in plt.get_backend().lower():
+        plt.close()
+    else:
+        plt.show()
 
 
 if __name__ == "__main__":
