@@ -1,7 +1,7 @@
 # ML From Scratch
 [![CI](https://github.com/ArsPoghosyan/ml-from-scratch/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/ArsPoghosyan/ml-from-scratch/actions/workflows/ci.yml)
 
-Core machine learning algorithms implemented from scratch with Python and NumPy.
+Classical machine-learning algorithms implemented from scratch with Python and NumPy, following a scikit-learn-inspired API.
 
 ## Scikit-learn Comparison
 
