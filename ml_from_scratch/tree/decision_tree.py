@@ -1,22 +1,23 @@
 """Decision tree implementations."""
+from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Optional
+from typing import Any
 
 import numpy as np
 
 from ml_from_scratch.base import BaseEstimator, ClassifierMixin, RegressorMixin
-from ml_from_scratch.utils.validation import check_X_y, check_array
+from ml_from_scratch.utils.validation import check_array, check_X_y
 
 
 @dataclass
 class _TreeNode:
-    feature_index: Optional[int] = None
-    threshold: Optional[float] = None
-    left: Optional["_TreeNode"] = None
-    right: Optional["_TreeNode"] = None
-    prediction: Optional[float] = None
-    class_counts: Optional[np.ndarray] = None
+    feature_index: int | None = None
+    threshold: float | None = None
+    left: _TreeNode | None = None
+    right: _TreeNode | None = None
+    prediction: float | None = None
+    class_counts: np.ndarray | None = None
 
     @property
     def is_leaf(self) -> bool:
@@ -28,7 +29,7 @@ class _BaseDecisionTree(BaseEstimator):
 
     def __init__(
         self,
-        max_depth: Optional[int] = None,
+        max_depth: int | None = None,
         min_samples_split: int = 2,
         min_impurity_decrease: float = 0.0,
         criterion: str = "gini",
@@ -38,7 +39,7 @@ class _BaseDecisionTree(BaseEstimator):
         self.min_impurity_decrease = min_impurity_decrease
         self.criterion = criterion
 
-    def fit(self, X: Any, y: Any = None) -> "_BaseDecisionTree":
+    def fit(self, X: Any, y: Any = None) -> _BaseDecisionTree:
         if y is None:
             raise ValueError("y is required for DecisionTree.fit.")
 
@@ -81,10 +82,10 @@ class _BaseDecisionTree(BaseEstimator):
 
     def _best_split(
         self, X: np.ndarray, y: np.ndarray
-    ) -> Optional[tuple[int, float, np.ndarray, np.ndarray, float]]:
+    ) -> tuple[int, float, np.ndarray, np.ndarray, float] | None:
         current_impurity = self._impurity(y)
         best_gain = 0.0
-        best_split: Optional[tuple[int, float, np.ndarray, np.ndarray, float]] = None
+        best_split: tuple[int, float, np.ndarray, np.ndarray, float] | None = None
         n_samples, n_features = X.shape
 
         for feature_index in range(n_features):
@@ -130,10 +131,7 @@ class _BaseDecisionTree(BaseEstimator):
         if y.shape[0] < self.min_samples_split:
             return True
 
-        if np.unique(y).shape[0] == 1:
-            return True
-
-        return False
+        return np.unique(y).shape[0] == 1
 
     def _predict_row(self, row: np.ndarray, node: _TreeNode) -> float:
         current = node
@@ -167,7 +165,7 @@ class DecisionTreeClassifier(ClassifierMixin, _BaseDecisionTree):
 
     def __init__(
         self,
-        max_depth: Optional[int] = None,
+        max_depth: int | None = None,
         min_samples_split: int = 2,
         min_impurity_decrease: float = 0.0,
         criterion: str = "gini",
@@ -179,7 +177,7 @@ class DecisionTreeClassifier(ClassifierMixin, _BaseDecisionTree):
             criterion=criterion,
         )
 
-    def fit(self, X: Any, y: Any = None) -> "DecisionTreeClassifier":
+    def fit(self, X: Any, y: Any = None) -> DecisionTreeClassifier:
         if y is None:
             raise ValueError("y is required for DecisionTreeClassifier.fit.")
 
@@ -267,7 +265,7 @@ class DecisionTreeRegressor(RegressorMixin, _BaseDecisionTree):
 
     def __init__(
         self,
-        max_depth: Optional[int] = None,
+        max_depth: int | None = None,
         min_samples_split: int = 2,
         min_impurity_decrease: float = 0.0,
     ):

@@ -1,6 +1,7 @@
 """Principal component analysis implementation."""
+from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Any
 
 import numpy as np
 
@@ -13,7 +14,7 @@ class PCA(BaseEstimator):
 
     def __init__(
         self,
-        n_components: Optional[int] = None,
+        n_components: int | None = None,
         whiten: bool = False,
         center: bool = True,
     ):
@@ -21,7 +22,7 @@ class PCA(BaseEstimator):
         self.whiten = whiten
         self.center = center
 
-    def fit(self, X: Any, y: Any = None) -> "PCA":
+    def fit(self, X: Any, y: Any = None) -> PCA:
         """Fit PCA by learning the principal axes of the input data."""
         X_checked = check_array(X)
         n_samples, n_features = X_checked.shape
@@ -30,15 +31,15 @@ class PCA(BaseEstimator):
             raise ValueError("PCA requires at least 2 samples.")
 
         if not isinstance(self.whiten, bool):
-            raise ValueError("whiten must be a boolean.")
+            raise TypeError("whiten must be a boolean.")
 
         if not isinstance(self.center, bool):
-            raise ValueError("center must be a boolean.")
+            raise TypeError("center must be a boolean.")
 
         if isinstance(self.n_components, bool) or not isinstance(
             self.n_components, (type(None), int, np.integer)
         ):
-            raise ValueError("n_components must be an integer or None.")
+            raise TypeError("n_components must be an integer or None.")
 
         if self.n_components is None:
             n_components = min(n_samples, n_features)

@@ -1,5 +1,4 @@
 import pytest
-
 from ml_from_scratch.base import BaseEstimator, ClassifierMixin, RegressorMixin
 
 

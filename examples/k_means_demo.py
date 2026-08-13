@@ -1,7 +1,7 @@
 """Fit and plot a simple k-means example."""
 
-from pathlib import Path
 import sys
+from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np

@@ -1,7 +1,8 @@
 """Random forest implementations."""
+from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Optional
+from typing import Any
 
 import numpy as np
 
@@ -10,7 +11,7 @@ from ml_from_scratch.tree.decision_tree import (
     DecisionTreeClassifier,
     DecisionTreeRegressor,
 )
-from ml_from_scratch.utils.validation import check_X_y, check_array
+from ml_from_scratch.utils.validation import check_array, check_X_y
 
 
 @dataclass
@@ -25,12 +26,12 @@ class _BaseRandomForest(BaseEstimator):
     def __init__(
         self,
         n_estimators: int = 100,
-        max_depth: Optional[int] = None,
+        max_depth: int | None = None,
         min_samples_split: int = 2,
         min_impurity_decrease: float = 0.0,
         bootstrap: bool = True,
         max_features: Any = None,
-        random_state: Optional[int] = None,
+        random_state: int | None = None,
     ):
         self.n_estimators = n_estimators
         self.max_depth = max_depth
@@ -40,7 +41,7 @@ class _BaseRandomForest(BaseEstimator):
         self.max_features = max_features
         self.random_state = random_state
 
-    def fit(self, X: Any, y: Any = None) -> "_BaseRandomForest":
+    def fit(self, X: Any, y: Any = None) -> _BaseRandomForest:
         if y is None:
             raise ValueError("y is required for RandomForest.fit.")
 
@@ -125,13 +126,13 @@ class RandomForestClassifier(ClassifierMixin, _BaseRandomForest):
     def __init__(
         self,
         n_estimators: int = 100,
-        max_depth: Optional[int] = None,
+        max_depth: int | None = None,
         min_samples_split: int = 2,
         min_impurity_decrease: float = 0.0,
         bootstrap: bool = True,
         max_features: Any = "sqrt",
         criterion: str = "gini",
-        random_state: Optional[int] = None,
+        random_state: int | None = None,
     ):
         super().__init__(
             n_estimators=n_estimators,
@@ -144,7 +145,7 @@ class RandomForestClassifier(ClassifierMixin, _BaseRandomForest):
         )
         self.criterion = criterion
 
-    def fit(self, X: Any, y: Any = None) -> "RandomForestClassifier":
+    def fit(self, X: Any, y: Any = None) -> RandomForestClassifier:
         if y is None:
             raise ValueError("y is required for RandomForestClassifier.fit.")
 
@@ -216,12 +217,12 @@ class RandomForestRegressor(RegressorMixin, _BaseRandomForest):
     def __init__(
         self,
         n_estimators: int = 100,
-        max_depth: Optional[int] = None,
+        max_depth: int | None = None,
         min_samples_split: int = 2,
         min_impurity_decrease: float = 0.0,
         bootstrap: bool = True,
         max_features: Any = 1.0,
-        random_state: Optional[int] = None,
+        random_state: int | None = None,
     ):
         super().__init__(
             n_estimators=n_estimators,
@@ -233,7 +234,7 @@ class RandomForestRegressor(RegressorMixin, _BaseRandomForest):
             random_state=random_state,
         )
 
-    def fit(self, X: Any, y: Any = None) -> "RandomForestRegressor":
+    def fit(self, X: Any, y: Any = None) -> RandomForestRegressor:
         if y is None:
             raise ValueError("y is required for RandomForestRegressor.fit.")
 

@@ -10,15 +10,15 @@ from ml_from_scratch.tree import (
 )
 
 __all__ = [
+    "PCA",
     "BaseEstimator",
     "ClassifierMixin",
-    "RegressorMixin",
-    "LinearRegression",
-    "LogisticRegression",
     "DecisionTreeClassifier",
     "DecisionTreeRegressor",
+    "KMeans",
+    "LinearRegression",
+    "LogisticRegression",
     "RandomForestClassifier",
     "RandomForestRegressor",
-    "KMeans",
-    "PCA",
+    "RegressorMixin",
 ]

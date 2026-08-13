@@ -1,6 +1,5 @@
 import numpy as np
 import pytest
-
 from ml_from_scratch.decomposition import PCA
 
 

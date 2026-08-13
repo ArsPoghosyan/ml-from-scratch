@@ -1,6 +1,7 @@
 """K-means clustering implementation."""
+from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Any
 
 import numpy as np
 
@@ -18,7 +19,7 @@ class KMeans(BaseEstimator):
         n_init: int = 10,
         max_iter: int = 300,
         tol: float = 1e-4,
-        random_state: Optional[int] = None,
+        random_state: int | None = None,
     ):
         self.n_clusters = n_clusters
         self.init = init
@@ -27,7 +28,7 @@ class KMeans(BaseEstimator):
         self.tol = tol
         self.random_state = random_state
 
-    def fit(self, X: Any, y: Any = None) -> "KMeans":
+    def fit(self, X: Any, y: Any = None) -> KMeans:
         """Compute k-means clustering."""
         X_checked = check_array(X)
         n_samples, n_features = X_checked.shape

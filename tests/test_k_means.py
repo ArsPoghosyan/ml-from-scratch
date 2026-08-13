@@ -1,6 +1,5 @@
 import numpy as np
 import pytest
-
 from ml_from_scratch.cluster import KMeans
 
 

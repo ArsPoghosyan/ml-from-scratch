@@ -12,12 +12,12 @@ def test_top_level_exports_include_pca():
 
 def test_top_level_exports_include_all_models():
     from ml_from_scratch import (
+        PCA,
         DecisionTreeClassifier,
         DecisionTreeRegressor,
         KMeans,
         LinearRegression,
         LogisticRegression,
-        PCA,
         RandomForestClassifier,
         RandomForestRegressor,
     )

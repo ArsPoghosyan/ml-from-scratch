@@ -1,7 +1,8 @@
 """Base estimator interfaces used by project models."""
+from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any, Optional
+from typing import Any
 
 
 class BaseEstimator(ABC):
@@ -12,7 +13,7 @@ class BaseEstimator(ABC):
     """
 
     @abstractmethod
-    def fit(self, X: Any, y: Optional[Any] = None) -> "BaseEstimator":
+    def fit(self, X: Any, y: Any | None = None) -> BaseEstimator:
         """Fit the estimator to training data."""
         raise NotImplementedError
 

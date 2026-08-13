@@ -5,7 +5,7 @@ from typing import Any
 import numpy as np
 
 from ml_from_scratch.base import BaseEstimator, ClassifierMixin
-from ml_from_scratch.utils.validation import check_X_y, check_array
+from ml_from_scratch.utils.validation import check_array, check_X_y
 
 
 class LogisticRegression(ClassifierMixin, BaseEstimator):

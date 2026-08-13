@@ -1,7 +1,6 @@
 import numpy as np
 import pytest
-
-from ml_from_scratch.utils.validation import check_X_y, check_array
+from ml_from_scratch.utils.validation import check_array, check_X_y
 
 
 def test_check_array_converts_1d_input_to_2d_float_array():
